@@ -34,9 +34,10 @@ def dump_preds(y_true, y_pred, meta=None, outpath='./preds.csv'):
     y_true = pd.Series(y_true, name='y_true')
     y_pred = pd.Series(y_pred, name='y_pred')
     if meta is not None:
-        preds = meta.copy()
-        preds.insert(loc=3, column='y_true', value=y_true.values)
-        preds.insert(loc=4, column='y_pred', value=y_pred.values)
+        # preds = meta.copy()
+        # preds.insert(loc=3, column='y_true', value=y_true.values)
+        # preds.insert(loc=4, column='y_pred', value=y_pred.values)
+        preds = pd.concat([meta, y_true, y_pred], axis=1)
     else:
         preds = pd.concat([y_true, y_pred], axis=1)
     preds.to_csv(Path(outpath), index=False)
